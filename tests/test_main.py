@@ -21,8 +21,8 @@ def test_read_sheep():
 def test_add_sheep():
     new_sheep_data = {
         "id": 7,
-        "name": "Spice",
-        "breed": "Gotland",
+        "name": "FirstSheep",
+        "breed": "Suffolk",
         "sex": "ewe"
     }
     response = client.post("/sheep", json=new_sheep_data)
@@ -37,3 +37,17 @@ def test_delete_sheep():
     assert response.status_code == 200
     response_two = client.get("/sheep/6")
     assert response_two.status_code == 404
+
+def test_update_sheep():
+    new_sheep_data = {
+        "id": 2,
+        "name": "FirstSheep",
+        "breed": "Suffolk",
+        "sex": "ewe"
+    }
+    response = client.put("/sheep", json=new_sheep_data)
+    assert response.status_code == 200
+    assert (response.json() == new_sheep_data)
+    response_two = client.get("/sheep/2")
+    assert response_two.status_code == 200
+    assert (response_two.json() == new_sheep_data)

@@ -26,3 +26,7 @@ def delete_sheep(id: int):
         db.delete_sheep(id)
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+@app.put("/sheep/", response_model=Sheep)
+def update_sheep(sheep: Sheep):
+    return db.update_sheep(sheep)

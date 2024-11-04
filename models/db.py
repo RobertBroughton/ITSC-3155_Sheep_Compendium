@@ -16,6 +16,10 @@ class FakeDB:
     def delete_sheep(self, id: int) -> None:
         removed_sheep = self.data.pop(id)
 
+    def update_sheep(self,sheep: Sheep) -> Sheep:
+        self.data[sheep.id] = sheep
+        return sheep
+
 db = FakeDB()
 db.data = {
     1: Sheep(id=1, name="Spice", breed="Gotland", sex="ewe"),
